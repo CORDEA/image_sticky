@@ -21,6 +21,10 @@ class _$HomeUiEventTearOff {
   _OpenPicker openPicker() {
     return _OpenPicker();
   }
+
+  _Empty empty() {
+    return _Empty();
+  }
 }
 
 /// @nodoc
@@ -31,32 +35,38 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function()? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_Empty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_Empty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,6 +135,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function() empty,
   }) {
     return openPicker();
   }
@@ -133,6 +144,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function()? empty,
   }) {
     return openPicker?.call();
   }
@@ -141,6 +153,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (openPicker != null) {
@@ -153,6 +166,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_Empty value) empty,
   }) {
     return openPicker(this);
   }
@@ -161,6 +175,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_Empty value)? empty,
   }) {
     return openPicker?.call(this);
   }
@@ -169,6 +184,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (openPicker != null) {
@@ -180,4 +196,112 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
 
 abstract class _OpenPicker implements HomeUiEvent {
   factory _OpenPicker() = _$_OpenPicker;
+}
+
+/// @nodoc
+abstract class _$EmptyCopyWith<$Res> {
+  factory _$EmptyCopyWith(_Empty value, $Res Function(_Empty) then) =
+      __$EmptyCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$EmptyCopyWithImpl<$Res> extends _$HomeUiEventCopyWithImpl<$Res>
+    implements _$EmptyCopyWith<$Res> {
+  __$EmptyCopyWithImpl(_Empty _value, $Res Function(_Empty) _then)
+      : super(_value, (v) => _then(v as _Empty));
+
+  @override
+  _Empty get _value => super._value as _Empty;
+}
+
+/// @nodoc
+
+class _$_Empty with DiagnosticableTreeMixin implements _Empty {
+  _$_Empty();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeUiEvent.empty()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'HomeUiEvent.empty'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Empty);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() openPicker,
+    required TResult Function() empty,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? openPicker,
+    TResult Function()? empty,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? openPicker,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_Empty value) empty,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_Empty value)? empty,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_Empty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Empty implements HomeUiEvent {
+  factory _Empty() = _$_Empty;
 }
