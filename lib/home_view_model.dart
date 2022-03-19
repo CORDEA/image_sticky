@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +16,12 @@ class HomeViewModel extends ChangeNotifier {
 
   void onAddTapped() {
     _event.add(HomeUiEvent.openPicker());
+  }
+
+  void onImagePicked(XFile? file) {
+    if (file == null) {
+      return;
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -20,7 +21,12 @@ class _HomePageState extends ConsumerState<HomePage> {
     super.initState();
     _subscription = ref.read(homeViewModelProvider).event.listen((event) {
       event.when(
-        openPicker: () {},
+        openPicker: () async {
+          final file = await openFile(acceptedTypeGroups: [
+            XTypeGroup(label: 'images', extensions: ['png', 'jpg']),
+          ]);
+          ref.read(homeViewModelProvider).onImagePicked(file);
+        },
         empty: () {},
       );
     });
