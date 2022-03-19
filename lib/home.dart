@@ -6,8 +6,27 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Image Sticky')),
-      body: const Center(),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const Expanded(child: SizedBox.expand()),
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.add_a_photo_outlined),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
+}
+
+class HomeViewModel {
+  void onAddTapped() {}
 }
