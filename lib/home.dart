@@ -60,9 +60,50 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () => ref.read(homeViewModelProvider).onAddTapped(),
-                icon: const Icon(Icons.add_a_photo_outlined),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    onPressed: () =>
+                        ref.read(homeViewModelProvider).onAddTapped(),
+                    icon: const Icon(Icons.add_a_photo_outlined),
+                  ),
+                  const SizedBox(width: 8),
+                  PopupMenuButton<_DropdownMenuItemType>(
+                    icon: const Icon(Icons.more_horiz),
+                    itemBuilder: (context) => const [
+                      PopupMenuItem(
+                        child: Text('Increment axis count'),
+                        value: _DropdownMenuItemType.incrementAxisCount,
+                      ),
+                      PopupMenuItem(
+                        child: Text('Decrement axis count'),
+                        value: _DropdownMenuItemType.decrementAxisCount,
+                      ),
+                      PopupMenuItem(
+                        child: Text('Set windows size'),
+                        value: _DropdownMenuItemType.setWindowSize,
+                      ),
+                    ],
+                    onSelected: (type) {
+                      switch (type) {
+                        case _DropdownMenuItemType.incrementAxisCount:
+                          ref
+                              .read(homeViewModelProvider)
+                              .onAxisCountIncreased();
+                          break;
+                        case _DropdownMenuItemType.decrementAxisCount:
+                          ref
+                              .read(homeViewModelProvider)
+                              .onAxisCountDecreased();
+                          break;
+                        case _DropdownMenuItemType.setWindowSize:
+                          ref.read(homeViewModelProvider).onWindowSizeSet();
+                          break;
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
           ],
@@ -81,4 +122,10 @@ class _HomeGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.file(File(viewModel.path));
   }
+}
+
+enum _DropdownMenuItemType {
+  incrementAxisCount,
+  decrementAxisCount,
+  setWindowSize,
 }

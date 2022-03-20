@@ -41,6 +41,18 @@ class HomeViewModel extends ChangeNotifier {
     _event.add(HomeUiEvent.openPicker());
   }
 
+  void onAxisCountIncreased() {
+    _axisCount += 1;
+    notifyListeners();
+  }
+
+  void onAxisCountDecreased() {
+    _axisCount -= 1;
+    notifyListeners();
+  }
+
+  void onWindowSizeSet() {}
+
   Future<void> onImagePicked(XFile? file) async {
     if (file == null) {
       return;
