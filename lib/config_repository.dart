@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+part 'config_repository.freezed.dart';
 
 final configRepositoryProvider = Provider((_) => ConfigRepository());
 
@@ -46,12 +49,12 @@ class ConfigRepository {
   }
 }
 
-class AppConfig {
-  AppConfig({
-    required this.axisCount,
-    required this.windowRect,
-  });
+@freezed
+class AppConfig with _$AppConfig {
+  factory AppConfig({
+    required int axisCount,
+    required Rect windowRect,
+  }) = _AppConfig;
 
-  final int axisCount;
-  final Rect windowRect;
+  static final empty = AppConfig(axisCount: 0, windowRect: Rect.zero);
 }

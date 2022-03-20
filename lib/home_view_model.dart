@@ -5,17 +5,22 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'config_repository.dart';
 import 'image_repository.dart';
 
 part 'home_view_model.freezed.dart';
 
 final homeViewModelProvider = ChangeNotifierProvider(
-  (ref) => HomeViewModel(ref.read(imageRepositoryProvider)).._init(),
+  (ref) => HomeViewModel(
+    ref.read(configRepositoryProvider),
+    ref.read(imageRepositoryProvider),
+  ).._init(),
 );
 
 class HomeViewModel extends ChangeNotifier {
-  HomeViewModel(this._imageRepository);
+  HomeViewModel(this._configRepository, this._imageRepository);
 
+  final ConfigRepository _configRepository;
   final ImageRepository _imageRepository;
 
   final _event = StreamController<HomeUiEvent>();
@@ -34,6 +39,10 @@ class HomeViewModel extends ChangeNotifier {
     final images = await _imageRepository.find();
     _items =
         images.map((e) => HomeItemViewModel(path: e)).toList(growable: false);
+    final config = await _configRepository.find();
+    if (config != null) {
+      _axisCount = config.axisCount;
+    }
     notifyListeners();
   }
 
@@ -41,13 +50,20 @@ class HomeViewModel extends ChangeNotifier {
     _event.add(HomeUiEvent.openPicker());
   }
 
-  void onAxisCountIncreased() {
+  Future<void> onAxisCountIncreased() async {
     _axisCount += 1;
+    await _configRepository
+        .insert(AppConfig.empty.copyWith(axisCount: _axisCount));
     notifyListeners();
   }
 
-  void onAxisCountDecreased() {
+  Future<void> onAxisCountDecreased() async {
+    if (_axisCount <= 1) {
+      return;
+    }
     _axisCount -= 1;
+    await _configRepository
+        .insert(AppConfig.empty.copyWith(axisCount: _axisCount));
     notifyListeners();
   }
 
