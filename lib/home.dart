@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,16 @@ class _HomePageState extends ConsumerState<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.max,
           children: [
-            const Expanded(child: SizedBox.expand()),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount:
+                    ref.watch(homeViewModelProvider.select((v) => v.axisCount)),
+                children: ref
+                    .watch(homeViewModelProvider.select((v) => v.items))
+                    .map((e) => _HomeGridItem(viewModel: e))
+                    .toList(),
+              ),
+            ),
             Align(
               alignment: Alignment.centerRight,
               child: IconButton(
@@ -59,5 +69,16 @@ class _HomePageState extends ConsumerState<HomePage> {
         ),
       ),
     );
+  }
+}
+
+class _HomeGridItem extends StatelessWidget {
+  const _HomeGridItem({Key? key, required this.viewModel}) : super(key: key);
+
+  final HomeItemViewModel viewModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.file(File(viewModel.path));
   }
 }

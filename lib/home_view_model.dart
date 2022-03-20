@@ -14,7 +14,11 @@ class HomeViewModel extends ChangeNotifier {
 
   Stream<HomeUiEvent> get event => _event.stream;
 
-  final List<HomeItemViewModel> _items = [];
+  int _axisCount = 2;
+
+  int get axisCount => _axisCount;
+
+  List<HomeItemViewModel> _items = [];
 
   List<HomeItemViewModel> get items => _items;
 
@@ -26,6 +30,8 @@ class HomeViewModel extends ChangeNotifier {
     if (file == null) {
       return;
     }
+    _items += [HomeItemViewModel(path: file.path)];
+    notifyListeners();
   }
 }
 
