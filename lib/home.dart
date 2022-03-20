@@ -16,6 +16,8 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  static const _itemPadding = 8.0;
+
   StreamSubscription? _subscription;
 
   @override
@@ -43,6 +45,20 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final bottomBar = _HomeBottomBar();
+    final children = ref
+        .watch(homeViewModelProvider.select((v) => v.items))
+        .map((e) => _HomeGridItem(viewModel: e))
+        .toList();
+    final count = ref.watch(homeViewModelProvider.select((v) => v.axisCount));
+
+    final idealWidth = (size.width - _itemPadding * (count - 1)) / count;
+    final rows = (children.length / count).ceil();
+    final idealHeight = (size.height -
+            bottomBar.preferredSize.height -
+            _itemPadding * (rows - 1)) /
+        rows;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -52,67 +68,71 @@ class _HomePageState extends ConsumerState<HomePage> {
           children: [
             Expanded(
               child: GridView.count(
-                crossAxisCount:
-                    ref.watch(homeViewModelProvider.select((v) => v.axisCount)),
-                children: ref
-                    .watch(homeViewModelProvider.select((v) => v.items))
-                    .map((e) => _HomeGridItem(viewModel: e))
-                    .toList(),
+                crossAxisSpacing: _itemPadding,
+                mainAxisSpacing: _itemPadding,
+                childAspectRatio: idealWidth / idealHeight,
+                crossAxisCount: count,
+                children: children,
               ),
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    onPressed: () =>
-                        ref.read(homeViewModelProvider).onAddTapped(),
-                    icon: const Icon(Icons.add_a_photo_outlined),
-                  ),
-                  const SizedBox(width: 8),
-                  PopupMenuButton<_DropdownMenuItemType>(
-                    icon: const Icon(Icons.more_horiz),
-                    itemBuilder: (context) => const [
-                      PopupMenuItem(
-                        child: Text('Increment axis count'),
-                        value: _DropdownMenuItemType.incrementAxisCount,
-                      ),
-                      PopupMenuItem(
-                        child: Text('Decrement axis count'),
-                        value: _DropdownMenuItemType.decrementAxisCount,
-                      ),
-                      PopupMenuItem(
-                        child: Text('Set windows size'),
-                        value: _DropdownMenuItemType.setWindowSize,
-                      ),
-                    ],
-                    onSelected: (type) async {
-                      switch (type) {
-                        case _DropdownMenuItemType.incrementAxisCount:
-                          ref
-                              .read(homeViewModelProvider)
-                              .onAxisCountIncreased();
-                          break;
-                        case _DropdownMenuItemType.decrementAxisCount:
-                          ref
-                              .read(homeViewModelProvider)
-                              .onAxisCountDecreased();
-                          break;
-                        case _DropdownMenuItemType.setWindowSize:
-                          ref
-                              .read(homeViewModelProvider)
-                              .onWindowSizeSet((await getWindowInfo()).frame);
-                          break;
-                      }
-                    },
-                  ),
-                ],
-              ),
+              child: _HomeBottomBar(),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _HomeBottomBar extends HookConsumerWidget implements PreferredSizeWidget {
+  @override
+  Size get preferredSize => const Size.fromHeight(40);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          onPressed: () => ref.read(homeViewModelProvider).onAddTapped(),
+          icon: const Icon(Icons.add_a_photo_outlined),
+        ),
+        const SizedBox(width: 8),
+        PopupMenuButton<_DropdownMenuItemType>(
+          icon: const Icon(Icons.more_horiz),
+          itemBuilder: (context) => const [
+            PopupMenuItem(
+              child: Text('Increment axis count'),
+              value: _DropdownMenuItemType.incrementAxisCount,
+            ),
+            PopupMenuItem(
+              child: Text('Decrement axis count'),
+              value: _DropdownMenuItemType.decrementAxisCount,
+            ),
+            PopupMenuItem(
+              child: Text('Set windows size'),
+              value: _DropdownMenuItemType.setWindowSize,
+            ),
+          ],
+          onSelected: (type) async {
+            switch (type) {
+              case _DropdownMenuItemType.incrementAxisCount:
+                ref.read(homeViewModelProvider).onAxisCountIncreased();
+                break;
+              case _DropdownMenuItemType.decrementAxisCount:
+                ref.read(homeViewModelProvider).onAxisCountDecreased();
+                break;
+              case _DropdownMenuItemType.setWindowSize:
+                ref
+                    .read(homeViewModelProvider)
+                    .onWindowSizeSet((await getWindowInfo()).frame);
+                break;
+            }
+          },
+        ),
+      ],
     );
   }
 }
