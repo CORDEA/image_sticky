@@ -22,6 +22,12 @@ class _$HomeUiEventTearOff {
     return _OpenPicker();
   }
 
+  _UpdateWindow updateWindow(Rect rect) {
+    return _UpdateWindow(
+      rect,
+    );
+  }
+
   _Empty empty() {
     return _Empty();
   }
@@ -35,18 +41,21 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function(Rect rect) updateWindow,
     required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
     required TResult orElse(),
   }) =>
@@ -54,18 +63,21 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_UpdateWindow value) updateWindow,
     required TResult Function(_Empty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) =>
@@ -135,6 +147,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function(Rect rect) updateWindow,
     required TResult Function() empty,
   }) {
     return openPicker();
@@ -144,6 +157,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
   }) {
     return openPicker?.call();
@@ -153,6 +167,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -166,6 +181,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_UpdateWindow value) updateWindow,
     required TResult Function(_Empty value) empty,
   }) {
     return openPicker(this);
@@ -175,6 +191,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
   }) {
     return openPicker?.call(this);
@@ -184,6 +201,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
@@ -196,6 +214,153 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
 
 abstract class _OpenPicker implements HomeUiEvent {
   factory _OpenPicker() = _$_OpenPicker;
+}
+
+/// @nodoc
+abstract class _$UpdateWindowCopyWith<$Res> {
+  factory _$UpdateWindowCopyWith(
+          _UpdateWindow value, $Res Function(_UpdateWindow) then) =
+      __$UpdateWindowCopyWithImpl<$Res>;
+  $Res call({Rect rect});
+}
+
+/// @nodoc
+class __$UpdateWindowCopyWithImpl<$Res> extends _$HomeUiEventCopyWithImpl<$Res>
+    implements _$UpdateWindowCopyWith<$Res> {
+  __$UpdateWindowCopyWithImpl(
+      _UpdateWindow _value, $Res Function(_UpdateWindow) _then)
+      : super(_value, (v) => _then(v as _UpdateWindow));
+
+  @override
+  _UpdateWindow get _value => super._value as _UpdateWindow;
+
+  @override
+  $Res call({
+    Object? rect = freezed,
+  }) {
+    return _then(_UpdateWindow(
+      rect == freezed
+          ? _value.rect
+          : rect // ignore: cast_nullable_to_non_nullable
+              as Rect,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateWindow with DiagnosticableTreeMixin implements _UpdateWindow {
+  _$_UpdateWindow(this.rect);
+
+  @override
+  final Rect rect;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeUiEvent.updateWindow(rect: $rect)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeUiEvent.updateWindow'))
+      ..add(DiagnosticsProperty('rect', rect));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UpdateWindow &&
+            const DeepCollectionEquality().equals(other.rect, rect));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(rect));
+
+  @JsonKey(ignore: true)
+  @override
+  _$UpdateWindowCopyWith<_UpdateWindow> get copyWith =>
+      __$UpdateWindowCopyWithImpl<_UpdateWindow>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() openPicker,
+    required TResult Function(Rect rect) updateWindow,
+    required TResult Function() empty,
+  }) {
+    return updateWindow(rect);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? openPicker,
+    TResult Function(Rect rect)? updateWindow,
+    TResult Function()? empty,
+  }) {
+    return updateWindow?.call(rect);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? openPicker,
+    TResult Function(Rect rect)? updateWindow,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (updateWindow != null) {
+      return updateWindow(rect);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_UpdateWindow value) updateWindow,
+    required TResult Function(_Empty value) empty,
+  }) {
+    return updateWindow(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_UpdateWindow value)? updateWindow,
+    TResult Function(_Empty value)? empty,
+  }) {
+    return updateWindow?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_UpdateWindow value)? updateWindow,
+    TResult Function(_Empty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (updateWindow != null) {
+      return updateWindow(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateWindow implements HomeUiEvent {
+  factory _UpdateWindow(Rect rect) = _$_UpdateWindow;
+
+  Rect get rect;
+  @JsonKey(ignore: true)
+  _$UpdateWindowCopyWith<_UpdateWindow> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -243,6 +408,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function(Rect rect) updateWindow,
     required TResult Function() empty,
   }) {
     return empty();
@@ -252,6 +418,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
   }) {
     return empty?.call();
@@ -261,6 +428,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -274,6 +442,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_UpdateWindow value) updateWindow,
     required TResult Function(_Empty value) empty,
   }) {
     return empty(this);
@@ -283,6 +452,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
   }) {
     return empty?.call(this);
@@ -292,6 +462,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {

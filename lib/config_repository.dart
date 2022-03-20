@@ -11,19 +11,18 @@ class ConfigRepository {
   static const _axisCountKey = 'config_axis_count';
   static const _windowKey = 'config_window';
 
-  Future<AppConfig?> find() async {
+  Future<AppConfig> find() async {
     final prefs = await SharedPreferences.getInstance();
     final count = prefs.getInt(_axisCountKey);
     final window = (prefs.getString(_windowKey)?.split(',') ?? [])
         .map((e) => double.tryParse(e) ?? -1)
         .where((e) => e > 0)
         .toList(growable: false);
-    if (count == null || window.length != 4) {
-      return null;
-    }
     return AppConfig(
-      axisCount: count,
-      windowRect: Rect.fromLTRB(window[0], window[1], window[2], window[3]),
+      axisCount: count ?? AppConfig.empty.axisCount,
+      windowRect: window.length == 4
+          ? Rect.fromLTRB(window[0], window[1], window[2], window[3])
+          : AppConfig.empty.windowRect,
     );
   }
 

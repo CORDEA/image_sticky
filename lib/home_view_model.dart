@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart';
@@ -40,8 +41,11 @@ class HomeViewModel extends ChangeNotifier {
     _items =
         images.map((e) => HomeItemViewModel(path: e)).toList(growable: false);
     final config = await _configRepository.find();
-    if (config != null) {
+    if (config.axisCount > 0) {
       _axisCount = config.axisCount;
+    }
+    if (config.windowRect != Rect.zero) {
+      _event.add(HomeUiEvent.updateWindow(config.windowRect));
     }
     notifyListeners();
   }
@@ -67,7 +71,10 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onWindowSizeSet() {}
+  Future<void> onWindowSizeSet(Rect window) async {
+    await _configRepository
+        .insert(AppConfig.empty.copyWith(windowRect: window));
+  }
 
   Future<void> onImagePicked(XFile? file) async {
     if (file == null) {
@@ -81,11 +88,19 @@ class HomeViewModel extends ChangeNotifier {
     _items += [viewModel];
     notifyListeners();
   }
+
+  @override
+  void dispose() {
+    _event.close();
+    super.dispose();
+  }
 }
 
 @freezed
 class HomeUiEvent with _$HomeUiEvent {
   factory HomeUiEvent.openPicker() = _OpenPicker;
+
+  factory HomeUiEvent.updateWindow(Rect rect) = _UpdateWindow;
 
   factory HomeUiEvent.empty() = _Empty;
 }

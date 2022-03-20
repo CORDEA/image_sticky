@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:window_size/window_size.dart';
 
 import 'home_view_model.dart';
 
@@ -28,6 +29,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           ]);
           ref.read(homeViewModelProvider).onImagePicked(file);
         },
+        updateWindow: setWindowFrame,
         empty: () {},
       );
     });
@@ -85,7 +87,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         value: _DropdownMenuItemType.setWindowSize,
                       ),
                     ],
-                    onSelected: (type) {
+                    onSelected: (type) async {
                       switch (type) {
                         case _DropdownMenuItemType.incrementAxisCount:
                           ref
@@ -98,7 +100,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                               .onAxisCountDecreased();
                           break;
                         case _DropdownMenuItemType.setWindowSize:
-                          ref.read(homeViewModelProvider).onWindowSizeSet();
+                          ref
+                              .read(homeViewModelProvider)
+                              .onWindowSizeSet((await getWindowInfo()).frame);
                           break;
                       }
                     },
