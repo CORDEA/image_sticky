@@ -5,11 +5,19 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'image_repository.dart';
+
 part 'home_view_model.freezed.dart';
 
-final homeViewModelProvider = ChangeNotifierProvider((_) => HomeViewModel());
+final homeViewModelProvider = ChangeNotifierProvider(
+  (ref) => HomeViewModel(ref.read(imageRepositoryProvider)).._init(),
+);
 
 class HomeViewModel extends ChangeNotifier {
+  HomeViewModel(this._imageRepository);
+
+  final ImageRepository _imageRepository;
+
   final _event = StreamController<HomeUiEvent>();
 
   Stream<HomeUiEvent> get event => _event.stream;
@@ -22,15 +30,27 @@ class HomeViewModel extends ChangeNotifier {
 
   List<HomeItemViewModel> get items => _items;
 
+  Future<void> _init() async {
+    final images = await _imageRepository.find();
+    _items =
+        images.map((e) => HomeItemViewModel(path: e)).toList(growable: false);
+    notifyListeners();
+  }
+
   void onAddTapped() {
     _event.add(HomeUiEvent.openPicker());
   }
 
-  void onImagePicked(XFile? file) {
+  Future<void> onImagePicked(XFile? file) async {
     if (file == null) {
       return;
     }
-    _items += [HomeItemViewModel(path: file.path)];
+    final viewModel = HomeItemViewModel(path: file.path);
+    if (_items.contains(viewModel)) {
+      return;
+    }
+    await _imageRepository.insert(file.path);
+    _items += [viewModel];
     notifyListeners();
   }
 }
