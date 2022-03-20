@@ -305,3 +305,142 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
 abstract class _Empty implements HomeUiEvent {
   factory _Empty() = _$_Empty;
 }
+
+/// @nodoc
+class _$HomeItemViewModelTearOff {
+  const _$HomeItemViewModelTearOff();
+
+  _HomeItemViewModel call({required String path}) {
+    return _HomeItemViewModel(
+      path: path,
+    );
+  }
+}
+
+/// @nodoc
+const $HomeItemViewModel = _$HomeItemViewModelTearOff();
+
+/// @nodoc
+mixin _$HomeItemViewModel {
+  String get path => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $HomeItemViewModelCopyWith<HomeItemViewModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HomeItemViewModelCopyWith<$Res> {
+  factory $HomeItemViewModelCopyWith(
+          HomeItemViewModel value, $Res Function(HomeItemViewModel) then) =
+      _$HomeItemViewModelCopyWithImpl<$Res>;
+  $Res call({String path});
+}
+
+/// @nodoc
+class _$HomeItemViewModelCopyWithImpl<$Res>
+    implements $HomeItemViewModelCopyWith<$Res> {
+  _$HomeItemViewModelCopyWithImpl(this._value, this._then);
+
+  final HomeItemViewModel _value;
+  // ignore: unused_field
+  final $Res Function(HomeItemViewModel) _then;
+
+  @override
+  $Res call({
+    Object? path = freezed,
+  }) {
+    return _then(_value.copyWith(
+      path: path == freezed
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$HomeItemViewModelCopyWith<$Res>
+    implements $HomeItemViewModelCopyWith<$Res> {
+  factory _$HomeItemViewModelCopyWith(
+          _HomeItemViewModel value, $Res Function(_HomeItemViewModel) then) =
+      __$HomeItemViewModelCopyWithImpl<$Res>;
+  @override
+  $Res call({String path});
+}
+
+/// @nodoc
+class __$HomeItemViewModelCopyWithImpl<$Res>
+    extends _$HomeItemViewModelCopyWithImpl<$Res>
+    implements _$HomeItemViewModelCopyWith<$Res> {
+  __$HomeItemViewModelCopyWithImpl(
+      _HomeItemViewModel _value, $Res Function(_HomeItemViewModel) _then)
+      : super(_value, (v) => _then(v as _HomeItemViewModel));
+
+  @override
+  _HomeItemViewModel get _value => super._value as _HomeItemViewModel;
+
+  @override
+  $Res call({
+    Object? path = freezed,
+  }) {
+    return _then(_HomeItemViewModel(
+      path: path == freezed
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_HomeItemViewModel
+    with DiagnosticableTreeMixin
+    implements _HomeItemViewModel {
+  _$_HomeItemViewModel({required this.path});
+
+  @override
+  final String path;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeItemViewModel(path: $path)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeItemViewModel'))
+      ..add(DiagnosticsProperty('path', path));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _HomeItemViewModel &&
+            const DeepCollectionEquality().equals(other.path, path));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(path));
+
+  @JsonKey(ignore: true)
+  @override
+  _$HomeItemViewModelCopyWith<_HomeItemViewModel> get copyWith =>
+      __$HomeItemViewModelCopyWithImpl<_HomeItemViewModel>(this, _$identity);
+}
+
+abstract class _HomeItemViewModel implements HomeItemViewModel {
+  factory _HomeItemViewModel({required String path}) = _$_HomeItemViewModel;
+
+  @override
+  String get path;
+  @override
+  @JsonKey(ignore: true)
+  _$HomeItemViewModelCopyWith<_HomeItemViewModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}

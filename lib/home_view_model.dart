@@ -14,6 +14,10 @@ class HomeViewModel extends ChangeNotifier {
 
   Stream<HomeUiEvent> get event => _event.stream;
 
+  final List<HomeItemViewModel> _items = [];
+
+  List<HomeItemViewModel> get items => _items;
+
   void onAddTapped() {
     _event.add(HomeUiEvent.openPicker());
   }
@@ -30,4 +34,9 @@ class HomeUiEvent with _$HomeUiEvent {
   factory HomeUiEvent.openPicker() = _OpenPicker;
 
   factory HomeUiEvent.empty() = _Empty;
+}
+
+@freezed
+class HomeItemViewModel with _$HomeItemViewModel {
+  factory HomeItemViewModel({required String path}) = _HomeItemViewModel;
 }
