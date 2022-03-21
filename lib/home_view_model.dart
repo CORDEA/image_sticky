@@ -50,7 +50,7 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onAddTapped() {
+  void onItemAdded() {
     _event.add(HomeUiEvent.openPicker());
   }
 

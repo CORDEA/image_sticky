@@ -97,7 +97,7 @@ class _HomeBottomBar extends HookConsumerWidget implements PreferredSizeWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton(
-          onPressed: () => ref.read(homeViewModelProvider).onAddTapped(),
+          onPressed: () => ref.read(homeViewModelProvider).onItemAdded(),
           icon: const Icon(Icons.add_a_photo_outlined),
         ),
         const SizedBox(width: 8),
