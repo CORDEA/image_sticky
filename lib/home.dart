@@ -46,42 +46,48 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final bottomBar = _HomeBottomBar();
+    Widget buildContainer(Widget child) {
+      return Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(child: child),
+              Align(
+                alignment: Alignment.centerRight,
+                child: _HomeBottomBar(),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     final children = ref
         .watch(homeViewModelProvider.select((v) => v.items))
         .map((e) => _HomeGridItem(viewModel: e))
         .toList();
-    final count = ref.watch(homeViewModelProvider.select((v) => v.axisCount));
+    if (children.isEmpty) {
+      return buildContainer(const Center(child: Text('There are no items.')));
+    }
 
+    final count = ref.watch(homeViewModelProvider.select((v) => v.axisCount));
+    final size = MediaQuery.of(context).size;
     final idealWidth = (size.width - _itemPadding * (count - 1)) / count;
     final rows = (children.length / count).ceil();
     final idealHeight = (size.height -
             bottomBar.preferredSize.height -
             _itemPadding * (rows - 1)) /
         rows;
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: GridView.count(
-                crossAxisSpacing: _itemPadding,
-                mainAxisSpacing: _itemPadding,
-                childAspectRatio: idealWidth / idealHeight,
-                crossAxisCount: count,
-                children: children,
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: _HomeBottomBar(),
-            ),
-          ],
-        ),
+    return buildContainer(
+      GridView.count(
+        crossAxisSpacing: _itemPadding,
+        mainAxisSpacing: _itemPadding,
+        childAspectRatio: idealWidth / idealHeight,
+        crossAxisCount: count,
+        children: children,
       ),
     );
   }
