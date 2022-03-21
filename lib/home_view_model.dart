@@ -89,6 +89,8 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void onItemRemoved(HomeItemViewModel viewModel) {}
+
   @override
   void dispose() {
     _event.close();

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:native_context_menu/native_context_menu.dart';
 import 'package:window_size/window_size.dart';
 
 import 'home_view_model.dart';
@@ -137,16 +138,31 @@ class _HomeBottomBar extends HookConsumerWidget implements PreferredSizeWidget {
   }
 }
 
-class _HomeGridItem extends StatelessWidget {
+class _HomeGridItem extends HookConsumerWidget {
   const _HomeGridItem({Key? key, required this.viewModel}) : super(key: key);
 
   final HomeItemViewModel viewModel;
 
   @override
-  Widget build(BuildContext context) {
-    return Image.file(
-      File(viewModel.path),
-      fit: BoxFit.cover,
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ContextMenuRegion(
+      onItemSelected: (item) {
+        switch (item.action as _ContextMenuItemType) {
+          case _ContextMenuItemType.remove:
+            ref.read(homeViewModelProvider).onItemRemoved(viewModel);
+            break;
+        }
+      },
+      menuItems: [
+        MenuItem(
+          title: 'Remove',
+          action: _ContextMenuItemType.remove,
+        ),
+      ],
+      child: Image.file(
+        File(viewModel.path),
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
@@ -155,4 +171,8 @@ enum _DropdownMenuItemType {
   incrementAxisCount,
   decrementAxisCount,
   setWindowSize,
+}
+
+enum _ContextMenuItemType {
+  remove,
 }
