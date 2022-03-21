@@ -144,7 +144,10 @@ class _HomeGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.file(File(viewModel.path));
+    return Image.file(
+      File(viewModel.path),
+      fit: BoxFit.cover,
+    );
   }
 }
 
