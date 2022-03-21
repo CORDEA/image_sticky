@@ -89,7 +89,11 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onItemRemoved(HomeItemViewModel viewModel) {}
+  Future<void> onItemRemoved(HomeItemViewModel viewModel) async {
+    await _imageRepository.delete(viewModel.path);
+    _items = _items.where((e) => e != viewModel).toList(growable: false);
+    notifyListeners();
+  }
 
   @override
   void dispose() {

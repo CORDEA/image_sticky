@@ -17,7 +17,13 @@ class ImageRepository {
     prefs.setStringList(_key, values + [path]);
   }
 
-  Future<void> delete() async {
+  Future<void> delete(String path) async {
+    final prefs = await SharedPreferences.getInstance();
+    final values = prefs.getStringList(_key) ?? [];
+    prefs.setStringList(_key, values..remove(path));
+  }
+
+  Future<void> clear() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(_key);
   }
