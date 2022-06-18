@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:native_context_menu/native_context_menu.dart';
+import 'package:native_context_menu/native_context_menu.dart' as menu;
 import 'package:window_size/window_size.dart';
 
 import 'home_view_model.dart';
@@ -151,7 +151,7 @@ class _HomeGridItem extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ContextMenuRegion(
+    return menu.ContextMenuRegion(
       onItemSelected: (item) {
         switch (item.action as _ContextMenuItemType) {
           case _ContextMenuItemType.remove:
@@ -160,7 +160,7 @@ class _HomeGridItem extends HookConsumerWidget {
         }
       },
       menuItems: [
-        MenuItem(
+        menu.MenuItem(
           title: 'Remove',
           action: _ContextMenuItemType.remove,
         ),
