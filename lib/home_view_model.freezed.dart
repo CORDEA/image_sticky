@@ -22,6 +22,12 @@ class _$HomeUiEventTearOff {
     return _OpenPicker();
   }
 
+  _OpenContextMenu openContextMenu(HomeItemViewModel viewModel) {
+    return _OpenContextMenu(
+      viewModel,
+    );
+  }
+
   _UpdateWindow updateWindow(Rect rect) {
     return _UpdateWindow(
       rect,
@@ -41,6 +47,7 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function(HomeItemViewModel viewModel) openContextMenu,
     required TResult Function(Rect rect) updateWindow,
     required TResult Function() empty,
   }) =>
@@ -48,6 +55,7 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
     TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
   }) =>
@@ -55,6 +63,7 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
     TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
     required TResult orElse(),
@@ -63,6 +72,7 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_OpenContextMenu value) openContextMenu,
     required TResult Function(_UpdateWindow value) updateWindow,
     required TResult Function(_Empty value) empty,
   }) =>
@@ -70,6 +80,7 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
     TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
   }) =>
@@ -77,6 +88,7 @@ mixin _$HomeUiEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
     TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
     required TResult orElse(),
@@ -131,7 +143,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'HomeUiEvent.openPicker'));
+    properties.add(DiagnosticsProperty('type', 'HomeUiEvent.openPicker'));
   }
 
   @override
@@ -147,6 +159,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function(HomeItemViewModel viewModel) openContextMenu,
     required TResult Function(Rect rect) updateWindow,
     required TResult Function() empty,
   }) {
@@ -157,6 +170,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
     TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
   }) {
@@ -167,6 +181,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
     TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
     required TResult orElse(),
@@ -181,6 +196,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_OpenContextMenu value) openContextMenu,
     required TResult Function(_UpdateWindow value) updateWindow,
     required TResult Function(_Empty value) empty,
   }) {
@@ -191,6 +207,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
     TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
   }) {
@@ -201,6 +218,7 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
     TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
     required TResult orElse(),
@@ -214,6 +232,171 @@ class _$_OpenPicker with DiagnosticableTreeMixin implements _OpenPicker {
 
 abstract class _OpenPicker implements HomeUiEvent {
   factory _OpenPicker() = _$_OpenPicker;
+}
+
+/// @nodoc
+abstract class _$OpenContextMenuCopyWith<$Res> {
+  factory _$OpenContextMenuCopyWith(
+          _OpenContextMenu value, $Res Function(_OpenContextMenu) then) =
+      __$OpenContextMenuCopyWithImpl<$Res>;
+  $Res call({HomeItemViewModel viewModel});
+
+  $HomeItemViewModelCopyWith<$Res> get viewModel;
+}
+
+/// @nodoc
+class __$OpenContextMenuCopyWithImpl<$Res>
+    extends _$HomeUiEventCopyWithImpl<$Res>
+    implements _$OpenContextMenuCopyWith<$Res> {
+  __$OpenContextMenuCopyWithImpl(
+      _OpenContextMenu _value, $Res Function(_OpenContextMenu) _then)
+      : super(_value, (v) => _then(v as _OpenContextMenu));
+
+  @override
+  _OpenContextMenu get _value => super._value as _OpenContextMenu;
+
+  @override
+  $Res call({
+    Object? viewModel = freezed,
+  }) {
+    return _then(_OpenContextMenu(
+      viewModel == freezed
+          ? _value.viewModel
+          : viewModel // ignore: cast_nullable_to_non_nullable
+              as HomeItemViewModel,
+    ));
+  }
+
+  @override
+  $HomeItemViewModelCopyWith<$Res> get viewModel {
+    return $HomeItemViewModelCopyWith<$Res>(_value.viewModel, (value) {
+      return _then(_value.copyWith(viewModel: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_OpenContextMenu
+    with DiagnosticableTreeMixin
+    implements _OpenContextMenu {
+  _$_OpenContextMenu(this.viewModel);
+
+  @override
+  final HomeItemViewModel viewModel;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeUiEvent.openContextMenu(viewModel: $viewModel)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeUiEvent.openContextMenu'))
+      ..add(DiagnosticsProperty('viewModel', viewModel));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _OpenContextMenu &&
+            const DeepCollectionEquality().equals(other.viewModel, viewModel));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(viewModel));
+
+  @JsonKey(ignore: true)
+  @override
+  _$OpenContextMenuCopyWith<_OpenContextMenu> get copyWith =>
+      __$OpenContextMenuCopyWithImpl<_OpenContextMenu>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() openPicker,
+    required TResult Function(HomeItemViewModel viewModel) openContextMenu,
+    required TResult Function(Rect rect) updateWindow,
+    required TResult Function() empty,
+  }) {
+    return openContextMenu(viewModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
+    TResult Function(Rect rect)? updateWindow,
+    TResult Function()? empty,
+  }) {
+    return openContextMenu?.call(viewModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
+    TResult Function(Rect rect)? updateWindow,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (openContextMenu != null) {
+      return openContextMenu(viewModel);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_OpenContextMenu value) openContextMenu,
+    required TResult Function(_UpdateWindow value) updateWindow,
+    required TResult Function(_Empty value) empty,
+  }) {
+    return openContextMenu(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
+    TResult Function(_UpdateWindow value)? updateWindow,
+    TResult Function(_Empty value)? empty,
+  }) {
+    return openContextMenu?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
+    TResult Function(_UpdateWindow value)? updateWindow,
+    TResult Function(_Empty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (openContextMenu != null) {
+      return openContextMenu(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OpenContextMenu implements HomeUiEvent {
+  factory _OpenContextMenu(HomeItemViewModel viewModel) = _$_OpenContextMenu;
+
+  HomeItemViewModel get viewModel;
+  @JsonKey(ignore: true)
+  _$OpenContextMenuCopyWith<_OpenContextMenu> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -289,6 +472,7 @@ class _$_UpdateWindow with DiagnosticableTreeMixin implements _UpdateWindow {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function(HomeItemViewModel viewModel) openContextMenu,
     required TResult Function(Rect rect) updateWindow,
     required TResult Function() empty,
   }) {
@@ -299,6 +483,7 @@ class _$_UpdateWindow with DiagnosticableTreeMixin implements _UpdateWindow {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
     TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
   }) {
@@ -309,6 +494,7 @@ class _$_UpdateWindow with DiagnosticableTreeMixin implements _UpdateWindow {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
     TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
     required TResult orElse(),
@@ -323,6 +509,7 @@ class _$_UpdateWindow with DiagnosticableTreeMixin implements _UpdateWindow {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_OpenContextMenu value) openContextMenu,
     required TResult Function(_UpdateWindow value) updateWindow,
     required TResult Function(_Empty value) empty,
   }) {
@@ -333,6 +520,7 @@ class _$_UpdateWindow with DiagnosticableTreeMixin implements _UpdateWindow {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
     TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
   }) {
@@ -343,6 +531,7 @@ class _$_UpdateWindow with DiagnosticableTreeMixin implements _UpdateWindow {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
     TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
     required TResult orElse(),
@@ -392,7 +581,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'HomeUiEvent.empty'));
+    properties.add(DiagnosticsProperty('type', 'HomeUiEvent.empty'));
   }
 
   @override
@@ -408,6 +597,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() openPicker,
+    required TResult Function(HomeItemViewModel viewModel) openContextMenu,
     required TResult Function(Rect rect) updateWindow,
     required TResult Function() empty,
   }) {
@@ -418,6 +608,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
     TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
   }) {
@@ -428,6 +619,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? openPicker,
+    TResult Function(HomeItemViewModel viewModel)? openContextMenu,
     TResult Function(Rect rect)? updateWindow,
     TResult Function()? empty,
     required TResult orElse(),
@@ -442,6 +634,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OpenPicker value) openPicker,
+    required TResult Function(_OpenContextMenu value) openContextMenu,
     required TResult Function(_UpdateWindow value) updateWindow,
     required TResult Function(_Empty value) empty,
   }) {
@@ -452,6 +645,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
     TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
   }) {
@@ -462,6 +656,7 @@ class _$_Empty with DiagnosticableTreeMixin implements _Empty {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OpenPicker value)? openPicker,
+    TResult Function(_OpenContextMenu value)? openContextMenu,
     TResult Function(_UpdateWindow value)? updateWindow,
     TResult Function(_Empty value)? empty,
     required TResult orElse(),

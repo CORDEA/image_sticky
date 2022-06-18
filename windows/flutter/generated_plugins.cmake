@@ -3,8 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  desktop_context_menu_windows
   file_selector_windows
-  native_context_menu
   window_size
 )
 

@@ -95,6 +95,10 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void onItemTapped(HomeItemViewModel viewModel) {
+    _event.add(HomeUiEvent.openContextMenu(viewModel));
+  }
+
   @override
   void dispose() {
     _event.close();
@@ -105,6 +109,10 @@ class HomeViewModel extends ChangeNotifier {
 @freezed
 class HomeUiEvent with _$HomeUiEvent {
   factory HomeUiEvent.openPicker() = _OpenPicker;
+
+  factory HomeUiEvent.openContextMenu(
+    HomeItemViewModel viewModel,
+  ) = _OpenContextMenu;
 
   factory HomeUiEvent.updateWindow(Rect rect) = _UpdateWindow;
 

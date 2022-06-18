@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:desktop_context_menu/desktop_context_menu.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:native_context_menu/native_context_menu.dart' as menu;
 import 'package:window_size/window_size.dart';
 
 import 'home_view_model.dart';
@@ -31,6 +31,17 @@ class _HomePageState extends ConsumerState<HomePage> {
             XTypeGroup(label: 'images', extensions: ['png', 'jpg']),
           ]);
           ref.read(homeViewModelProvider).onImagePicked(file);
+        },
+        openContextMenu: (viewModel) async {
+          final item = await showContextMenu(menuItems: [
+            ContextMenuItem(
+              title: 'Remove',
+              onTap: () {
+                ref.read(homeViewModelProvider).onItemRemoved(viewModel);
+              },
+            ),
+          ]);
+          item?.onTap?.call();
         },
         updateWindow: setWindowFrame,
         empty: () {},
@@ -151,20 +162,9 @@ class _HomeGridItem extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return menu.ContextMenuRegion(
-      onItemSelected: (item) {
-        switch (item.action as _ContextMenuItemType) {
-          case _ContextMenuItemType.remove:
-            ref.read(homeViewModelProvider).onItemRemoved(viewModel);
-            break;
-        }
-      },
-      menuItems: [
-        menu.MenuItem(
-          title: 'Remove',
-          action: _ContextMenuItemType.remove,
-        ),
-      ],
+    return GestureDetector(
+      onSecondaryTap: () =>
+          ref.read(homeViewModelProvider).onItemTapped(viewModel),
       child: Image.file(
         File(viewModel.path),
         fit: BoxFit.cover,
@@ -177,8 +177,4 @@ enum _DropdownMenuItemType {
   incrementAxisCount,
   decrementAxisCount,
   setWindowSize,
-}
-
-enum _ContextMenuItemType {
-  remove,
 }
